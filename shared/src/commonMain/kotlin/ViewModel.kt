@@ -1,15 +1,16 @@
 class ViewModel(private val mainScreen: MainScreen = MainScreen()) {
 
-    fun getName(): MainState {
+    fun getState(): MainState {
         val result = mainScreen fetches platformName
-        val state = MainState()
-
-        if (result.isEmpty()) state.error = "Error can't fetch data"
-
-        if (result.isNotEmpty()) state.success = result
-
-        return state
+        return result.reduceToState()
     }
+}
+
+fun String.reduceToState(): MainState {
+    val state = MainState()
+    if (isEmpty()) state.error = "Error can't fetch data"
+    if (isNotEmpty()) state.success = this
+    return state
 }
 
 class MainScreen(private val repository: Repository = DataRepository()) {

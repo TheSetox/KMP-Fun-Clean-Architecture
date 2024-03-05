@@ -27,7 +27,7 @@ fun App() {
                 Text("Click me!")
             }
             AnimatedVisibility(showContent) {
-                val state = remember { viewModel.getName() }
+                val state = remember { viewModel.getState() }
 
                 if (state.error.isNotEmpty()) {
                     Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {

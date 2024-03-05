@@ -1,0 +1,91 @@
+@startuml
+
+folder Project {
+    folder composeApp {
+        component androidMain as androidCompose
+        component iosMain as iosCompose
+        component commonMain as commonCompose
+        component desktopMain as desktopCompose
+        component webMain as webCompose
+    }
+    component iosApp
+    folder shared {
+        folder androidMain {
+            component AndroidViewModel
+        }
+        folder commonMain {
+            component ViewModel as commonViewModel
+        }
+        folder iosMain {
+            component ViewModel as iosViewModel
+        }
+        folder desktopMain {
+            component ViewModel as desktopViewModel
+        }
+        folder webMain {
+            component ViewModel as webViewModel
+        }
+    }
+    component server
+    folder domain {
+        component UseCase
+        component Repository
+    }
+    folder shared-data {
+        folder commonMain as commonData {
+            component DataRepository
+            component Source
+            component DataSource
+        }
+        folder androidMain as androidData {
+            component DataSource as AndroidSource
+        }
+        folder iosMain as iosData {
+            component DataSource as iOSSource
+        }
+        folder webMain as webData {
+            component DataSource as webSource
+        }
+        folder desktopMain as desktopData {
+            component DataSource as desktopSource
+        }
+    }
+}
+
+"Android Entry Point" ---> androidCompose
+"iOS Entry Point" --> iosApp
+"web Entry Point" ---> webCompose
+"Desktop Entry Point" ---> desktopCompose
+"Server Entry Point" --> server
+
+iosApp --> iosCompose
+
+iosCompose --> commonCompose
+androidCompose --> commonCompose
+desktopCompose --> commonCompose
+webCompose --> commonCompose
+
+commonCompose --> commonViewModel
+
+
+commonViewModel --> iosViewModel
+commonViewModel -> AndroidViewModel
+commonViewModel ---> desktopViewModel
+commonViewModel ---> webViewModel
+
+commonViewModel --> UseCase
+
+server -> UseCase
+UseCase --> Repository
+
+Repository ..> DataRepository
+DataRepository --> Source
+Source ..> DataSource
+
+DataSource -> AndroidSource
+DataSource --> iOSSource
+DataSource --> desktopSource
+DataSource --> webSource
+
+
+@enduml

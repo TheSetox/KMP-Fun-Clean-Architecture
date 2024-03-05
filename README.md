@@ -1,4 +1,16 @@
+# Kotlin Multiplatform Playground
+
 This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop, Server.
+
+## Kotlin Multiplatform with Compose Multiplatform (Main Structure)
+
+![image_diagram.png](document/image_diagram.png)
+
+## Main Goal for Architecture (Status: Work in Progress)
+
+![image_fun_arch.png](document/image_fun_arch.png)
+
+## Folders
 
 * `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
   It contains several subfolders:
@@ -14,14 +26,12 @@ This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop, Ser
 
 * `/shared` is for the code that will be shared between all targets in the project.
   The most important subfolder is `commonMain`. If preferred, you can add code to the platform-specific folders here too.
+  This is being used as the main `/shared` folder.
 
+* `/domain` is a shared module where it is responsible on creating the business logic. You usually don't
+need to add code to the platform-specific but you can add additional business logic depending on the target
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html),
-[Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/#compose-multiplatform),
-[Kotlin/Wasm](https://kotl.in/wasm/)…
+* `/data` is a shared module where it is responsible for fetching the data. You can fetch platform-specific
+data.
 
 **Note:** Compose/Web is Experimental and may be changed at any time. Use it only for evaluation purposes.
-We would appreciate your feedback on Compose/Web and Kotlin/Wasm in the public Slack channel [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web).
-If you face any issues, please report them on [GitHub](https://github.com/JetBrains/compose-multiplatform/issues).
-
-You can open the web application by running the `:composeApp:wasmJsBrowserDevelopmentRun` Gradle task.
