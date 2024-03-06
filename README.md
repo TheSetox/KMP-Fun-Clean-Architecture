@@ -2,6 +2,10 @@
 
 This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop, Server.
 
+For more details, you can check the official document:
+
+https://thesetox.github.io/KMP-Playground-Document/introduction.html
+
 ## Kotlin Multiplatform with Compose Multiplatform (Main Structure)
 
 ![image_diagram.png](document/image_diagram.png)
