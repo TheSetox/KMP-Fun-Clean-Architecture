@@ -15,34 +15,41 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import samplemultiplatform.composeapp.generated.resources.Res
 import samplemultiplatform.composeapp.generated.resources.compose_multiplatform
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 @Preview
 fun App() {
     MaterialTheme {
         val viewModel = ViewModel()
         var showContent by remember { mutableStateOf(false) }
-        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
+            Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             Button(onClick = { showContent = !showContent }) {
                 Text("Click me!")
             }
             AnimatedVisibility(showContent) {
                 val state = remember { viewModel.getState() }
-
-                if (state.error.isNotEmpty()) {
-                    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text("Compose: ${state.error}")
-                    }
-                }
-
-                if (state.success.isNotEmpty()) {
-                    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                        Image(painterResource(Res.drawable.compose_multiplatform), null)
-                        Text("Compose: ${state.success}")
-                    }
-                }
+                showCurrentState(state)
 
             }
+        }
+    }
+}
+
+@Composable
+@OptIn(ExperimentalResourceApi::class)
+private fun showCurrentState(state: MainState) {
+    if (state.error.isNotEmpty()) {
+        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+            Text("Compose: ${state.error}")
+        }
+    }
+
+    if (state.success.isNotEmpty()) {
+        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+            Image(painterResource(Res.drawable.compose_multiplatform), null)
+            Text("Compose: ${state.success}")
         }
     }
 }

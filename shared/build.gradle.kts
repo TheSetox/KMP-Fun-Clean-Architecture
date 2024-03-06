@@ -7,19 +7,19 @@ plugins {
 }
 
 kotlin {
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
-        browser {
-            commonWebpackConfig {
-                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(project.projectDir.path)
-                    }
-                }
-            }
-        }
-    }
+//    @OptIn(ExperimentalWasmDsl::class)
+//    wasmJs {
+//        browser {
+//            commonWebpackConfig {
+//                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
+//                    static = (static ?: mutableListOf()).apply {
+//                        // Serve sources to debug inside browser
+//                        add(project.projectDir.path)
+//                    }
+//                }
+//            }
+//        }
+//    }
     
     androidTarget {
         compilations.all {
@@ -39,6 +39,9 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.domain)
             implementation(projects.data)
+        }
+        androidMain.dependencies {
+            implementation(libs.androidx.lifecycle.viewmodel.ktx)
         }
     }
 }

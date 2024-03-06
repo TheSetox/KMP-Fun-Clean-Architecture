@@ -4,22 +4,23 @@ import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.sqlDelight)
 }
 
 kotlin {
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
-        browser {
-            commonWebpackConfig {
-                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(project.projectDir.path)
-                    }
-                }
-            }
-        }
-    }
+//    @OptIn(ExperimentalWasmDsl::class)
+//    wasmJs {
+//        browser {
+//            commonWebpackConfig {
+//                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
+//                    static = (static ?: mutableListOf()).apply {
+//                        // Serve sources to debug inside browser
+//                        add(project.projectDir.path)
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     androidTarget {
         compilations.all {
@@ -39,6 +40,20 @@ kotlin {
         commonMain.dependencies {
             // put your Multiplatform dependencies here
             implementation(projects.domain)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.koin.core)
+            implementation(libs.sql.coroutines.extensions)
+        }
+        androidMain.dependencies {
+            implementation(libs.ktor.client.android)
+            implementation(libs.sql.android.driver)
+        }
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
+            implementation(libs.sql.native.driver)
         }
     }
 }
@@ -54,4 +69,13 @@ android {
         minSdk = libs.versions.android.minSdk.get().toInt()
     }
 }
+
+sqldelight {
+    databases {
+        create(name = "SampleDataBase") {
+            packageName.set("org.example.project.db")
+        }
+    }
+}
+
 
