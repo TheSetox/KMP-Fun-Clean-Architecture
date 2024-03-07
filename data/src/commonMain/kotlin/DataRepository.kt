@@ -1,5 +1,5 @@
-class DataRepository(
-    private val source: Source = DataSource()
-): Repository {
-    override fun getPlatform() = source.getPlatform()
+import data.source.SampleSource
+
+class DataRepository(private val sampleSource: SampleSource): Repository {
+    override fun getPlatform() = sampleSource.getPlatform()
 }

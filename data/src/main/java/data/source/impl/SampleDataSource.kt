@@ -1,6 +1,10 @@
-import android.os.Build
+package data.source.impl
 
-actual class DataSource : Source {
+import Platform
+import android.os.Build
+import data.source.SampleSource
+
+actual class SampleDataSource : SampleSource {
     actual override fun getPlatform(): Platform {
         val platformName = "Android ${Build.VERSION.SDK_INT}"
         return Platform(platformName)

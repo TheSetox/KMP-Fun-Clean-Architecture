@@ -1,3 +1,5 @@
+import data.source.impl.SampleDataSource
+
 class ViewModel(private val mainScreen: MainScreen = MainScreen()) {
 
     fun getState(): MainState {
@@ -13,7 +15,7 @@ fun String.reduceToState(): MainState {
     return state
 }
 
-class MainScreen(private val repository: Repository = DataRepository()) {
+class MainScreen(private val repository: Repository = DataRepository(SampleDataSource())) {
     infix fun fetches(useCase: Repository.() -> String): String {
         return repository.useCase()
     }
