@@ -1,3 +1,5 @@
+import entity.Article
+import entity.Source
 
 
 data class Platform(
@@ -6,4 +8,8 @@ data class Platform(
 
 interface Repository {
     fun getPlatform(): Platform
+
+    suspend fun getArticles(): List<Article>
+
+    suspend fun getSources(): List<Source>
 }

@@ -1,4 +1,4 @@
-package data.source
+package source
 
 import Platform
 

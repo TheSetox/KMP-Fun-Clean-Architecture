@@ -1,27 +1,22 @@
-import data.source.impl.SampleDataSource
+import entity.Source
 
-class ViewModel(private val mainScreen: MainScreen = MainScreen()) {
+class ViewModel(private val myUseCase: MyUseCase) {
 
-    fun getState(): MainState {
-        val result = mainScreen fetches platformName
+    suspend fun getState(): MainState {
+        val result = myUseCase fetches articleSources
         return result.reduceToState()
     }
 }
 
-fun String.reduceToState(): MainState {
+fun SourceResult.reduceToState(): MainState {
     val state = MainState()
-    if (isEmpty()) state.error = "Error can't fetch data"
-    if (isNotEmpty()) state.success = this
+    onFailure { state.error = it.message.toString() }
+    onSuccess { state.success = it }
     return state
 }
 
-class MainScreen(private val repository: Repository = DataRepository(SampleDataSource())) {
-    infix fun fetches(useCase: Repository.() -> String): String {
-        return repository.useCase()
-    }
-}
 
 data class MainState(
-    var success: String = "",
+    var success: List<Source> = emptyList(),
     var error: String = ""
 )

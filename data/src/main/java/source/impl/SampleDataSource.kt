@@ -1,8 +1,8 @@
-package data.source.impl
+package source.impl
 
 import Platform
 import android.os.Build
-import data.source.SampleSource
+import source.SampleSource
 
 actual class SampleDataSource : SampleSource {
     actual override fun getPlatform(): Platform {

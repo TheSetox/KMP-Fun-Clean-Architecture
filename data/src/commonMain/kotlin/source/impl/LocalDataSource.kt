@@ -1,9 +1,9 @@
-package data.source.impl
+package source.impl
 
-import data.source.LocalSource
+import entity.Article
+import entity.Source
 import org.example.project.db.SampleDataBase
-import raw.data.Article
-import raw.data.Source
+import source.LocalSource
 
 class LocalDataSource(private val db: SampleDataBase) : LocalSource {
     override fun getSources(): List<Source> {

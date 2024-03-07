@@ -1,7 +1,7 @@
-package data.source
+package source
 
-import raw.data.Article
-import raw.data.Source
+import entity.Article
+import entity.Source
 
 interface LocalSource {
 
