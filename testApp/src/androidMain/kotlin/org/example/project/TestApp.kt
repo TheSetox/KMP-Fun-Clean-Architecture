@@ -1,9 +1,8 @@
 package org.example.project
 
 import android.app.Application
-import di.dataModule
+import di.sharedModule
 import org.example.project.di.androidModule
-import org.example.project.di.domainModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -15,7 +14,7 @@ class TestApp: Application() {
     }
 
     private fun initKoin() {
-        val modules = dataModule + androidModule + domainModule
+        val modules = androidModule + sharedModule
         startKoin {
             androidContext(this@TestApp)
             modules(modules)

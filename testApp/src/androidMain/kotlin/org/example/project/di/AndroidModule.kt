@@ -13,5 +13,4 @@ val driverModule = module {
 
 val androidModule = listOf(
     driverModule,
-    // TODO: will add more
 )

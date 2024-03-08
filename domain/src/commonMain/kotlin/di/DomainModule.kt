@@ -1,4 +1,4 @@
-package org.example.project.di
+package di
 
 import MyUseCase
 import org.koin.dsl.module

@@ -3,6 +3,7 @@ package org.example.project
 import App
 import MyUseCase
 import Repository
+import ViewModel
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,8 +20,16 @@ class MainActivity : ComponentActivity() {
         val localSource: LocalSource by inject()
         val newsRemoteSource: NewsRemoteSource by inject()
         val myUseCase: MyUseCase by inject()
+        val viewModel: ViewModel by inject()
         setContent {
-            App(sampleSource, repository, localSource, newsRemoteSource, myUseCase)
+            App(
+                sampleSource,
+                repository,
+                localSource,
+                newsRemoteSource,
+                myUseCase,
+                viewModel
+            )
         }
     }
 }

@@ -42,6 +42,7 @@ kotlin {
             implementation(libs.koin.core)
             implementation(projects.domain)
             implementation(projects.data)
+            implementation(projects.shared)
         }
     }
 }

@@ -4,7 +4,11 @@ plugins {
 }
 
 kotlin {
-    
+    compilerOptions {
+        // Common compiler options applied to all Kotlin source sets
+        freeCompilerArgs.add("-Xexpect-actual-classes")
+    }
+
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -23,6 +27,8 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.domain)
             implementation(projects.data)
+            implementation(libs.koin.core)
+            implementation(libs.kotlinx.coroutines.core)
         }
         androidMain.dependencies {
             implementation(libs.androidx.lifecycle.viewmodel.ktx)
