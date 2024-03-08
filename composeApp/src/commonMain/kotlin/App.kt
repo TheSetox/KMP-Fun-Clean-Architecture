@@ -19,37 +19,37 @@ import samplemultiplatform.composeapp.generated.resources.compose_multiplatform
 @Preview
 fun App() {
     MaterialTheme {
-        val viewModel = ViewModel()
         var showContent by remember { mutableStateOf(false) }
         Column(
             Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
+                Text("Click me test!")
             }
-            AnimatedVisibility(showContent) {
-                val state = remember { viewModel.getState() }
-                showCurrentState(state)
-
-            }
+            Text("agas")
+//            AnimatedVisibility(showContent) {
+//                val state = remember { viewModel.getState() }
+//                showCurrentState(state)
+//
+//            }
         }
     }
 }
 
-@Composable
-@OptIn(ExperimentalResourceApi::class)
-private fun showCurrentState(state: MainState) {
-    if (state.error.isNotEmpty()) {
-        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Text("Compose: ${state.error}")
-        }
-    }
-
-    if (state.success.isNotEmpty()) {
-        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Image(painterResource(Res.drawable.compose_multiplatform), null)
-            Text("Compose: ${state.success}")
-        }
-    }
-}
+//@Composable
+//@OptIn(ExperimentalResourceApi::class)
+//private fun showCurrentState(state: MainState) {
+//    if (state.error.isNotEmpty()) {
+//        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+//            Text("Compose: ${state.error}")
+//        }
+//    }
+//
+//    if (state.success.isNotEmpty()) {
+//        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+//            Image(painterResource(Res.drawable.compose_multiplatform), null)
+//            Text("Compose: ${state.success}")
+//        }
+//    }
+//}

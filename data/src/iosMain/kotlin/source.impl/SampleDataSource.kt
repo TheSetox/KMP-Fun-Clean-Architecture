@@ -1,5 +1,7 @@
 package source.impl
 
+import platform.UIKit.UIDevice
+import Platform
 import source.SampleSource
 
 actual class SampleDataSource : SampleSource {

@@ -45,8 +45,8 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-            implementation(libs.coil.compose)
-            implementation(projects.shared)
+//            implementation(libs.coil.compose)
+            api(projects.shared)
         }
 
         desktopMain.dependencies {

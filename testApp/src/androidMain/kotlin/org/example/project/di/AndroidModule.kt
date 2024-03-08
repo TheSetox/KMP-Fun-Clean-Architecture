@@ -11,6 +11,4 @@ val driverModule = module {
 }
 
 
-val androidModule = listOf(
-    driverModule,
-)
+val androidModule = listOf(driverModule)

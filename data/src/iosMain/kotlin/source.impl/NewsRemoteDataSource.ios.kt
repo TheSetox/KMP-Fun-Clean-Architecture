@@ -1,5 +1,7 @@
 package source.impl
 
 actual fun getApiKey(): String {
-    TODO("Not yet implemented")
+    // Add your API key in https://newsapi.org/
+    // TODO create system env or the same
+    return ""
 }
