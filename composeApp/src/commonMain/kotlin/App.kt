@@ -1,55 +1,74 @@
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Button
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import org.jetbrains.compose.resources.ExperimentalResourceApi
-import org.jetbrains.compose.resources.painterResource
+import androidx.compose.ui.unit.dp
+import entity.Article
+import entity.Source
 import org.jetbrains.compose.ui.tooling.preview.Preview
-
-import samplemultiplatform.composeapp.generated.resources.Res
-import samplemultiplatform.composeapp.generated.resources.compose_multiplatform
 
 @Composable
 @Preview
-fun App() {
+fun App(viewModel: ViewModel) {
+    val state = viewModel.state.collectAsState()
+    viewModel calls LoadArticles
     MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
-        Column(
-            Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me test!")
+        Column {
+            when (val stateValue = state.value) {
+                is State.ArticleSourceState -> ArticleSourcesContent(stateValue.sources)
+                is State.ArticleState -> ArticleContent(stateValue.articles)
+                State.Error -> Error()
+                State.Loading -> Loading()
             }
-            Text("agas")
-//            AnimatedVisibility(showContent) {
-//                val state = remember { viewModel.getState() }
-//                showCurrentState(state)
-//
-//            }
         }
     }
 }
 
-//@Composable
-//@OptIn(ExperimentalResourceApi::class)
-//private fun showCurrentState(state: MainState) {
-//    if (state.error.isNotEmpty()) {
-//        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-//            Text("Compose: ${state.error}")
-//        }
-//    }
-//
-//    if (state.success.isNotEmpty()) {
-//        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-//            Image(painterResource(Res.drawable.compose_multiplatform), null)
-//            Text("Compose: ${state.success}")
-//        }
-//    }
-//}
+@Composable
+fun Loading() = Text("Loading..")
+
+
+@Composable
+fun Error() = Text("Error on fetching. Please try again.")
+
+@Composable
+fun ArticleContent(articles: List<Article>) {
+    LazyColumn {
+        items(articles) { article ->
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                Text("Title: ${article.title}")
+                Text("Description: ${article.description}")
+                Text("Publish At: ${article.date}")
+                Text("Image url: ${article.imageUrl}")
+            }
+        }
+    }
+}
+
+@Composable
+fun ArticleSourcesContent(sources: List<Source>) {
+    LazyColumn {
+        items(sources) { source ->
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                Text("Id: ${source.id}")
+                Text("Country: ${source.country}")
+                Text("Description: ${source.desc}")
+                Text("Name: ${source.name}")
+                Text("Language: ${source.language}")
+            }
+        }
+    }
+}

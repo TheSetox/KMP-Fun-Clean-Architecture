@@ -6,13 +6,12 @@ import org.koin.core.component.inject
 import org.koin.core.context.startKoin
 
 fun initKoin() {
-    val modules = sharedModule
-
     startKoin {
-        modules(modules)
+        modules(iOsSharedModule)
     }
 }
 
 class ViewModelInjector : KoinComponent {
-    val viewModel: ViewModel by inject()
+    private val viewModel: ViewModel by inject()
+    fun getViewModel() = viewModel
 }

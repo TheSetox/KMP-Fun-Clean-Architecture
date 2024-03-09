@@ -37,10 +37,12 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.ktor.client.android)
             implementation(libs.sql.android.driver)
+            implementation(libs.koin.android)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
             implementation(libs.sql.native.driver)
+            implementation(libs.stately.common)
         }
         desktopMain.dependencies {
             implementation(libs.sql.jvm.driver)
@@ -77,5 +79,3 @@ sqldelight {
         }
     }
 }
-
-

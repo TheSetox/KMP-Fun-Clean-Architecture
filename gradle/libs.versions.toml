@@ -22,8 +22,10 @@ lifecycleViewmodelKtx = "2.7.0"
 navigationCompose = "2.7.7"
 coilCompose = "3.0.0-alpha05"
 ktorClient = "2.3.8"
-koin = "3.4.3"
-sqlDelight = "2.0.0"
+koin = "3.5.0"
+sqlDelight = "2.0.1"
+
+stately = "2.0.5"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -64,6 +66,8 @@ sql-coroutines-extensions = { module = "app.cash.sqldelight:coroutines-extension
 sql-native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
 sql-android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
 sql-jvm-driver = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqlDelight" }
+
+stately-common = { module = "co.touchlab:stately-common", version.ref = "stately" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
