@@ -1,5 +1,6 @@
 import entity.Article
 import entity.Source
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -26,6 +27,7 @@ class ViewModel(private val myUseCase: MyUseCase) : BaseViewModel() {
     }
 
     private fun loadArticles() = scope.launch {
+        delay(2000)
         val result = myUseCase fetches articles
         result.apply {
             onFailure { _state.emit(State.Error) }
