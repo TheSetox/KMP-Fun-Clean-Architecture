@@ -2,9 +2,44 @@
 
 This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop, Server.
 
-For more details, you can check the official document:
+- Android - **OK**
+- iOS - **OK**
+- Web - in progress
+- Desktop - in progress
+- Server - in progress
 
-https://thesetox.github.io/KMP-Playground-Document/introduction.html
+## Android
+<img src="document/android_screenshot.png" width="300">
+
+## iOS
+<img src="document/ios_screenshot.png" width="300">
+
+## Building the app
+
+> [!IMPORTANT]
+> 
+> You need to add the **NEWS_API_KEY** in your `local.properties` for Android.
+>
+> For iOS, you can update the api key in the `data` module, `iosMain/source.impl/NewsRemoteDataSource.ios.kt`.
+>
+> To get your own api key, go to --> https://newsapi.org/
+
+## Languages, libraries and tools used
+
+1. Kotlin
+2. Kotlin Coroutine
+3. Kotlinx Serialization
+4. Ktor client library
+5. Compose Multiplatform
+6. Koin
+7. SQL delight
+8. Coil
+
+> [!WARNING]
+> 
+> For more details, you can check the official document:
+>
+> https://thesetox.github.io/KMP-Playground-Document/introduction.html **(Work in Progress)**
 
 ## Kotlin Multiplatform with Compose Multiplatform (Main Structure)
 
@@ -38,4 +73,11 @@ need to add code to the platform-specific but you can add additional business lo
 * `/data` is a shared module where it is responsible for fetching the data. You can fetch platform-specific
 data.
 
-**Note:** Compose/Web is Experimental and may be changed at any time. Use it only for evaluation purposes.
+>[!NOTE]
+>**Note:** Compose/Web is Experimental and may be changed at any time. Use it only for evaluation purposes.
+
+## Acknowledgements
+
+Special thanks to https://github.com/petros-efthymiou.
+
+The project is an insipration from https://github.com/petros-efthymiou/DailyPulse
