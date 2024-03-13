@@ -7,7 +7,6 @@ plugins {
 }
 
 kotlin {
-    
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -38,15 +37,14 @@ kotlin {
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
         }
+
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
-            implementation(compose.material)
-            implementation(compose.ui)
+            implementation(compose.material3)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(libs.coil.compose)
-            implementation(libs.coil.core)
             implementation(libs.coil.network)
             implementation(projects.shared)
             implementation(projects.domain)

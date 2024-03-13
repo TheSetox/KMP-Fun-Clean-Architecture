@@ -14,14 +14,16 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -59,7 +61,10 @@ fun MainContent(state: State): @Composable (PaddingValues) -> Unit = {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(bottom = it.calculateBottomPadding()),
+            .padding(
+                bottom = it.calculateBottomPadding(),
+                top = it.calculateTopPadding()
+            ),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -72,24 +77,26 @@ fun MainContent(state: State): @Composable (PaddingValues) -> Unit = {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar(): @Composable () -> Unit = {
     TopAppBar(
+        title = {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center,
+                fontSize = 20.sp,
+                text = "Sample Kotlin Multiplatform",
+            )
+        },
         modifier = Modifier.fillMaxWidth(),
-    ) {
-        Text(
-            modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center,
-            fontSize = 20.sp,
-            text = "Sample Kotlin Multiplatform",
-        )
-    }
+        colors = TopAppBarDefaults.topAppBarColors(Color.Transparent)
+    )
 }
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun BottomBar(viewModel: ViewModel): @Composable () -> Unit = {
-    BottomNavigation(modifier = Modifier.fillMaxWidth()) {
+    BottomAppBar(modifier = Modifier.fillMaxWidth()) {
         BottomNavigationItem("Articles", viewModel)
         BottomNavigationItem("Sources", viewModel)
     }
@@ -126,7 +133,6 @@ fun ArticleItem(article: Article) {
         shape = RoundedCornerShape(32.dp),
         border = BorderStroke(2.dp, Color.LightGray),
         modifier = Modifier.padding(8.dp),
-        elevation = 16.dp
     ) {
         Column(
             modifier = Modifier
@@ -170,7 +176,7 @@ fun TextTitle(title: String) {
     Text(
         text = title,
         fontWeight = FontWeight.Bold,
-        fontSize = 24.sp
+        fontSize = 16.sp
     )
     Spacer(modifier = Modifier.height(8.dp))
 }
@@ -208,17 +214,18 @@ fun ImageItem(imageUrl: String?) {
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun RowScope.BottomNavigationItem(item: String, viewModel: ViewModel) {
-    BottomNavigationItem(
+    NavigationBarItem(
         icon = {
             Icon(
-                modifier = Modifier.size(50.dp),
+                modifier = Modifier.size(45.dp),
                 painter = painterResource(Res.drawable.compose_multiplatform),
                 contentDescription = null
             )
         },
         label = { Text(item) },
-        selected = true,
+        selected = false,
         onClick = {
+            viewModel calls Loading
             when (getNavigation(item)) {
                 Navigation.Article -> viewModel calls LoadArticles
                 Navigation.Sources -> viewModel calls LoadArticleSources

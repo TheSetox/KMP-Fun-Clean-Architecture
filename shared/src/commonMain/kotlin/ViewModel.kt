@@ -14,7 +14,12 @@ class ViewModel(private val myUseCase: MyUseCase) : BaseViewModel() {
         when (intent) {
             LoadArticleSources -> loadArticleSources()
             LoadArticles -> loadArticles()
+            Loading -> loading()
         }
+    }
+
+    private fun loading() = scope.launch {
+        _state.emit(State.Loading)
     }
 
     private fun loadArticleSources() = scope.launch {
@@ -44,5 +49,7 @@ sealed class State {
 }
 
 sealed class Intent
-object LoadArticles : Intent()
-object LoadArticleSources : Intent()
+data object LoadArticles : Intent()
+data object LoadArticleSources : Intent()
+
+data object Loading : Intent()
